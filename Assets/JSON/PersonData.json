@@ -1,0 +1,82 @@
+[
+  {
+    "person_id": 1,
+    "person_moving_line": 1,
+    "speed": 10,
+    "status": "Moving",
+    "direction": "forward",
+    "current_position": 50
+  },
+  {
+    "person_id": 2,
+    "person_moving_line": 2,
+    "speed": 0,
+    "status": "Stopped",
+    "direction": "backward",
+    "current_position": 70
+  },
+  {
+    "person_id": 3,
+    "person_moving_line": 1,
+    "speed": 15,
+    "status": "Moving",
+    "direction": "forward",
+    "current_position": 25
+  },
+  {
+    "person_id": 4,
+    "person_moving_line": 3,
+    "speed": 25,
+    "status": "Moving",
+    "direction": "forward",
+    "current_position": 90
+  },
+  {
+    "person_id": 5,
+    "person_moving_line": 2,
+    "speed": 12,
+    "status": "Moving",
+    "direction": "backward",
+    "current_position": 40
+  },
+  {
+    "person_id": 6,
+    "person_moving_line": 1,
+    "speed": 18,
+    "status": "Moving",
+    "direction": "forward",
+    "current_position": 60
+  },
+  {
+    "person_id": 7,
+    "person_moving_line": 3,
+    "speed": 0,
+    "status": "Stopped",
+    "direction": "backward",
+    "current_position": 80
+  },
+  {
+    "person_id": 8,
+    "person_moving_line": 2,
+    "speed": 15,
+    "status": "Moving",
+    "direction": "backward",
+    "current_position": 10
+  },
+  {
+    "person_id": 9,
+    "person_moving_line": 1,
+    "speed": 22,
+    "status": "Moving",
+    "direction": "forward",
+    "current_position": 15
+  },
+  {
+    "person_id": 10,
+    "person_moving_line": 4,
+    "speed": 17,
+    "status": "Moving",
+    "direction": "forward",
+    "current_position": 75
+  }
+]
