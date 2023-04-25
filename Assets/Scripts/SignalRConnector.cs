@@ -8,38 +8,46 @@ using System.Collections.Generic;
 public class SignalRConnector
 {
     // This action will be invoked when a new message is received
-    public Action<Message> OnMessageReceived;
+    public Action<List<Message>> OnMessageReceived;
     // HubConnection is used to establish a connection to a SignalR hub
     private HubConnection connection;
 
     // Initialize the connection to the SignalR hub
     public async Task InitAsync()
     {
-        Debug.Log("Connecting to SignalR hub at https://localhost:7111/StudioHub");
-        // Build the connection to the SignalR hub
+        // Debug.Log("Connecting to SignalR hub at http://10.39.1.29:88/StudioHub");
+        // Build the connection to the SignalR stop
+#if DEBUG
         connection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:7111/StudioHub")
+                .WithUrl("http://10.39.1.29:88/StudioHub")
                 .WithAutomaticReconnect()
                 .Build();
+#else
+
+        connection = new HubConnectionBuilder()
+                .WithUrl("http://10.39.1.29:88/StudioHub")
+                .WithAutomaticReconnect()
+                .Build();
+#endif
 
         // Listen for "UnityMessage" event and deserialize the received messages
         connection.On<string>("UnityMessage", (message) =>
         {
-            // Deserialize the message into a List of Message objects
+                        // Deserialize the message into a List of Message objects
             List<Message> receivedMessages = JsonConvert.DeserializeObject<List<Message>>(message);
             // Loop through the received messages and invoke the OnMessageReceived action for each message
-            foreach (Message receivedMessage in receivedMessages)
-            {
-                Debug.Log($"Received message: {receivedMessage}");
-                OnMessageReceived?.Invoke(receivedMessage);
-            }
+            //foreach (Message receivedMessage in receivedMessages)
+            //{
+        //        Debug.Log($"Received message: {receivedMessage}");
+                OnMessageReceived?.Invoke(receivedMessages);
+            //}
         });
 
         // Listen for "SendMessageAsync" event and deserialize the received message
         connection.On<string>("SendMessageAsync", (message) =>
         {
             // Deserialize the message into a Message object
-            Message receivedMessage = JsonConvert.DeserializeObject<Message>(message);
+            List<Message> receivedMessage = JsonConvert.DeserializeObject<List<Message>>(message);
             // Invoke the OnMessageReceived action with the received message
             OnMessageReceived?.Invoke(receivedMessage);
         });
@@ -56,7 +64,9 @@ public class SignalRConnector
             // Serialize the message into JSON
             string json = JsonConvert.SerializeObject(message);
             // Invoke the "SendMessageAsync" method on the SignalR hub with the JSON message and a user identifier
+            Debug.Log(message.ToString());
             await connection.InvokeAsync("SendMessageAsync", "user", json);
+          
         }
         catch (Exception ex)
         {
@@ -69,6 +79,7 @@ public class SignalRConnector
     {
         try
         {
+            Debug.Log("Started");
             await connection.StartAsync();
         }
         catch (Exception ex)

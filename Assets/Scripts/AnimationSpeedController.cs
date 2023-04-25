@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class AnimationSpeedController : MonoBehaviour
@@ -7,20 +6,21 @@ public class AnimationSpeedController : MonoBehaviour
     private Animator animator;
     private float speed;
 
+    private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Awake()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>(); 
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        animator.speed = speed;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
     public void ChangeAnimationSpeed(float newSpeed)
     {
-        speed = newSpeed;
+       // animator.speed = 0.75f;
+       //animator.Play("Walking");
+        //animator.speed = newSpeed;
+        //Debug.Log("animator speed" + animator.speed);
     }
 }
