@@ -696,9 +696,7 @@ namespace InteractiveMovement.Models
             float factor = Mathf.Abs(currentPosition.x - oldPosition);
 
             // Changes speed of animator as a function of the speed the person is moving ing
-            //personObject.GetComponent<AnimationSpeedController>().ChangeAnimationSpeed(0.75f);//
-                //Mathf.Clamp((factor == 0?1:factor) * moveSpeed 
-                //, 0.5f, 1.75f));
+            personObject.GetComponent<AnimationSpeedController>().ChangeAnimationSpeed(Mathf.Clamp(factor * moveSpeed , 0.5f, 1.75f));
 
             // Interpolates as a function of the distance that needs to be covered
              float progress = 0;
@@ -759,6 +757,16 @@ namespace InteractiveMovement.Models
         {
             yield return new WaitForSeconds(0f);
 
+        }
+
+        /// <summary>
+        /// Flips a person along the x axis
+        /// </summary>
+        /// <param name="person"></param>
+        private void FlipPerson(GameObject person, string direction)
+        {
+            float flip = direction == "Forward" ? 1.4f : -1.4f;
+            person.transform.localScale = new Vector3(flip, person.transform.localScale.y, person.transform.localScale.z);
         }
     }
 }

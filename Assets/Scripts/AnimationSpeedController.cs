@@ -10,7 +10,7 @@ public class AnimationSpeedController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //animator = GetComponent<Animator>(); 
+        animator = GetComponent<Animator>(); 
     }
     private void Start()
     {
@@ -18,9 +18,8 @@ public class AnimationSpeedController : MonoBehaviour
     }
     public void ChangeAnimationSpeed(float newSpeed)
     {
-       // animator.speed = 0.75f;
-       //animator.Play("Walking");
-        //animator.speed = newSpeed;
+       animator.speed = newSpeed;
+       animator.Play("Walking");
         //Debug.Log("animator speed" + animator.speed);
     }
 }
